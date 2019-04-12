@@ -9,7 +9,7 @@ const PORT = 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get("/", (req, res, next) => {
+app.get("/", function(req, res, next) {
   res.send("jaya welcome");
 });
 
@@ -17,6 +17,7 @@ app.use(function(req, res, next) {
   const err = new Error("Not found");
   err.status = 404;
   next(err);
+  debugger;
 });
 app.use(errorHandler);
 
