@@ -1,23 +1,22 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const errorHandler = require("./handlers/error");
-
-const PORT = 3001;
+const authRoutes = require("./routes/auth");
+const PORT = 8080;
 
 app.use(cors());
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", function(req, res, next) {
-  res.send("jaya welcome");
-});
+app.use("/api/auth", authRoutes);
 
 app.use(function(req, res, next) {
   const err = new Error("Not found");
   err.status = 404;
   next(err);
-  debugger;
 });
 app.use(errorHandler);
 
