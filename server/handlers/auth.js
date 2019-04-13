@@ -1,7 +1,35 @@
 const db = require("../models");
 const jwt = require("jsonwebtoken");
 
-// module.exports.signin = function() {};
+module.exports.signin = async function(req, res, next) {
+  try {
+    let user = await db.User.findOne({ email: req.body.email });
+
+    let { id, username, email, profileImageUrl } = user;
+    let isMatch = await user.comparePassword(req.body.password);
+    if (isMatch) {
+      const token = jwt.sign(
+        { id, username },
+        (secretOrPrivateKey = process.env.SECRET_KEY)
+      );
+      return res.status(200).json({
+        id,
+        username,
+        token
+      });
+    } else {
+      return next({
+        status: 404,
+        message: "Invalid email/password"
+      });
+    }
+  } catch (err) {
+    return next({
+      status: 404,
+      message: "Invalid email/password given"
+    });
+  }
+};
 
 module.exports.signup = async function(req, res, next) {
   try {
