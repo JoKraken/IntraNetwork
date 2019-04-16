@@ -5,6 +5,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
+const messagesRoutes = require("./routes/messages");
+
 const PORT = 8080;
 
 app.use(cors());
@@ -12,6 +14,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api/auth", authRoutes);
+app.use("/api/users/:id/messages", messagesRoutes);
 
 app.use(function(req, res, next) {
   const err = new Error("Not found");

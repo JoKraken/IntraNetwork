@@ -1,4 +1,5 @@
 const User = require("./user");
+const Message = require("./message");
 const mongoose = require("mongoose");
 mongoose.set("debug", true);
 mongoose
@@ -10,4 +11,4 @@ mongoose
     console.log("Unable to connect to the mongodb instance. Error: ", reason);
   });
 
-module.exports = { User };
+module.exports = { User, Message };

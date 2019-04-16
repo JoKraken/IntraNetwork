@@ -1,5 +1,6 @@
 const db = require("../models");
 const jwt = require("jsonwebtoken");
+const secretOrPrivateKey = process.env.SECRET_KEY;
 
 module.exports.signin = async function(req, res, next) {
   try {
@@ -8,10 +9,7 @@ module.exports.signin = async function(req, res, next) {
     let { id, username, email, profileImageUrl } = user;
     let isMatch = await user.comparePassword(req.body.password);
     if (isMatch) {
-      const token = jwt.sign(
-        { id, username },
-        (secretOrPrivateKey = process.env.SECRET_KEY)
-      );
+      const token = jwt.sign({ id, username }, secretOrPrivateKey);
       return res.status(200).json({
         id,
         username,
@@ -42,7 +40,7 @@ module.exports.signup = async function(req, res, next) {
         id,
         username
       },
-      (secretOrPrivateKey = process.env.SECRET_KEY)
+      secretOrPrivateKey
     );
     return res.status(200).json({
       id,
