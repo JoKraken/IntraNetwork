@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const JSON = require("circular-json");
+const db = require("./models");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
 const messagesRoutes = require("./routes/messages");
@@ -20,6 +22,20 @@ app.use(
   ensureCorrectUser,
   messagesRoutes
 );
+
+app.get("/api/messages", loginRequired, async function(req, res, next) {
+  try {
+    let messages = await db.Message.find()
+      .sort({ createdAt: "desc" })
+      .populate("user", {
+        username: true,
+        profileImageUrl: true
+      });
+    return res.status(200).json(messages);
+  } catch (err) {
+    next(err);
+  }
+});
 
 app.use(function(req, res, next) {
   const err = new Error("Not found");
