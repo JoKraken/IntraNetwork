@@ -10,15 +10,16 @@ class Navbar extends Component {
           <Link to="/" className="navbar-brand">
             <img src="" alt="IntraNetwork" />
           </Link>
+
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+            <li>
+              <Link to="/signin">Log In</Link>
+            </li>
+          </ul>
         </div>
-        <ul className="nav navbar-nav navbar-right">
-          <li>
-            <Link to="/signup">Sign Up</Link>
-          </li>
-          <li>
-            <Link to="/signin">Log In</Link>
-          </li>
-        </ul>
       </nav>
     );
   }
