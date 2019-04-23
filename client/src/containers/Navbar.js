@@ -7,16 +7,17 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand">
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
-            <img src="" alt="IntraNetwork" />
-          </Link>
-
+          <div className="navbar-header">
+            <Link to="/" className="navbar-brand">
+              <div>IntraNetwork</div>
+            </Link>
+          </div>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/signup">Sign up</Link>
             </li>
             <li>
-              <Link to="/signin">Log In</Link>
+              <Link to="/signin">Log in</Link>
             </li>
           </ul>
         </div>
@@ -24,13 +25,11 @@ class Navbar extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+
+function mapStateToProps(state) {
   return {
     currentUser: state.currentUser
   };
-};
+}
 
-export default connect(
-  mapStateToProps,
-  null
-)(Navbar);
+export default connect(mapStateToProps)(Navbar);
