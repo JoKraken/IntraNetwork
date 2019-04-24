@@ -39,6 +39,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchMessages, removeMessage })(
-  MessageList
-);
+export default connect(
+  mapStateToProps,
+  { fetchMessages, removeMessage }
+)(MessageList);
