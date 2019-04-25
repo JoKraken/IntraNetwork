@@ -9,13 +9,17 @@ export function setTokenHeader(token) {
 }
 
 export function apiCall(method, path, data) {
+  console.log(method, path, data);
   return new Promise((resolve, reject) => {
     return axios[method.toLowerCase()](path, data)
       .then(res => {
+        console.log("I am resolved response", res);
         return resolve(res.data);
       })
       .catch(err => {
-        return reject(err.response.data.error);
+        console.log(" I am rejected response", err);
+        // return reject(err.response.data.error);
+        return reject(err);
       });
   });
 }

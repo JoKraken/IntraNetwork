@@ -9,6 +9,7 @@ class MessageList extends Component {
   }
   render() {
     const { messages, removeMessage, currentUser } = this.props;
+    console.log("These are all messages", messages);
     let messageList = messages.map(m => (
       <MessageItem
         key={m._id}
@@ -16,7 +17,10 @@ class MessageList extends Component {
         text={m.text}
         username={m.user.username}
         profileImageUrl={m.user.profileImageUrl}
-        removeMessage={removeMessage.bind(this, m.user._id, m._id)}
+        // removeMessage={removeMessage.bind(this, m.user._id, m._id)}
+        removeMessage={removeMessage}
+        messageId={m._id}
+        userId={m.user._id}
         isCorrectUser={currentUser === m.user._id}
       />
     ));

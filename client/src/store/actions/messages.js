@@ -13,10 +13,18 @@ export const remove = id => ({
 });
 
 export const removeMessage = (user_id, message_id) => {
+  // console.log("I am from remove message function");
+  console.log(
+    "This is user id " + user_id + "This is message id " + message_id
+  );
   return dispatch => {
     return apiCall("delete", `/api/users/${user_id}/messages/${message_id}`)
-      .then(() => dispatch(remove(message_id)))
+      .then(res => {
+        console.log(res);
+        dispatch(remove(message_id));
+      })
       .catch(err => {
+        console.log(err);
         addError(err.message);
       });
   };

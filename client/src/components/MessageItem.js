@@ -9,7 +9,9 @@ const MessageItem = ({
   text,
   username,
   removeMessage,
-  isCorrectUser
+  isCorrectUser,
+  messageId,
+  userId
 }) => (
   <div>
     <li className="list-group-item">
@@ -29,9 +31,12 @@ const MessageItem = ({
         </span>
         <p>{text}</p>
         {isCorrectUser && (
-          <a className="btn btn-danger" onClick={removeMessage}>
+          <button
+            className="btn btn-danger"
+            onClick={() => removeMessage(userId, messageId)}
+          >
             Delete
-          </a>
+          </button>
         )}
       </div>
     </li>

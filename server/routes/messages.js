@@ -7,10 +7,9 @@ const {
   deleteMessage
 } = require("../handlers/messages");
 
-router.route("/").post(createMessage);
-router
-  .route("/:message_id")
-  .get(getMessage)
-  .delete(deleteMessage);
+router.post("/", createMessage);
+router.get("/:message_id", getMessage);
+
+router.delete("/:message_id", deleteMessage);
 
 module.exports = router;
